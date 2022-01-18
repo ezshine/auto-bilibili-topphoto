@@ -1,0 +1,23 @@
+{
+  "name": "auto-bilibili-topphoto",
+  "version": "1.0.0",
+  "description": "a bot auto renew bilibili top photo like hetongxue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezshine/auto-bilibili-topphoto.git"
+  },
+  "author": "ezshine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ezshine/auto-bilibili-topphoto/issues"
+  },
+  "homepage": "https://github.com/ezshine/auto-bilibili-topphoto#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "canvas": "^2.9.0"
+  }
+}
