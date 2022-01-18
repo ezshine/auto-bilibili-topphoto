@@ -25,12 +25,14 @@ jobs:
       # Runs a single command using the runners shell
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.4.0
+
+      - name: Setup Basically Packages
+        run:
+          sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
         
       - name: Install NPM dependencies
         run: 
-          sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-          npm install axios
-          npm install canvas
+          npm install
           
       - name: Run
         run:
