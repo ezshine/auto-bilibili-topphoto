@@ -2,10 +2,7 @@ const { createCanvas, loadImage ,registerFont } = require('canvas');
 const fs = require("fs");
 const axios = require('axios');
 
-const BILI_JCT = process.env.BILI_JCT;
-const SESSDATA = process.env.SESSDATA;
-const DEDEUSERID = process.env.DEDEUSERID;
-const DEDEUSERID__CKMD5 = process.env.DEDEUSERID__CKMD5;
+const [BILI_JCT, SESSDATA,DEDEUSERID,DEDEUSERID__CKMD5] = process.argv.slice(2);
 
 //注册字体
 registerFont('digit.ttf', { family: 'digit' });
@@ -34,7 +31,7 @@ async function postTopPhoto(base64){
     const res = await axios.request({
         url:"https://space.bilibili.com/ajax/topphoto/uploadTopPhotov2",
         method:"POST",
-        data:"topphoto="+base64+"&csrf="+csrf,
+        data:"topphoto="+base64+"&csrf="+BILI_JCT,
         headers:{
             'referer': 'https://space.bilibili.com/'+DEDEUSERID,
             "accept": "application/json, text/plain, */*",
@@ -57,14 +54,14 @@ const diffDays = (date, otherDate) => Math.ceil(Math.abs(date - otherDate) / (10
 async function getLastPubDistance(){
     //https://api.bilibili.com/x/space/arc/search?mid="+(event.bili_user_id||'422646817')+"&ps=10&tid=0&pn="+(event.page||1)+"&keyword=&order=pubdate&jsonp=jsonp
     const res = await axios.request({
-        url:"https://api.bilibili.com/x/space/arc/search?mid="+dedeuserid+"&pn=1&ps=1&order=pubdate&jsonp=jsonp"
+        url:"https://api.bilibili.com/x/space/arc/search?mid="+DEDEUSERID+"&pn=1&ps=1&order=pubdate&jsonp=jsonp"
     });
 
     return diffDays(new Date(res.data.data.list.vlist[0].created*1000),new Date())+"";
 }
 
 //执行绘制图片
-async function process(){
+async function painting(){
     clearCanvas();
 
     //添加背景图
@@ -104,4 +101,4 @@ async function process(){
     postTopPhoto(base64);
 }
 
-process();
+painting();
