@@ -35,10 +35,11 @@ jobs:
           npm install
           
       - name: Run
-        run:
-          node index.js
-        with:
+        env:
           SESSDATA: ${{secrets.SESSDATA}}
           BILI_JCT: ${{secrets.BILI_JCT}}
           DEDEUSERID: ${{secrets.DEDEUSERID}}
           DEDEUSERID__CKMD5: ${{secrets.DEDEUSERID__CKMD5}}
+        run:
+          SESSDATA="${{secrets.SESSDATA}}" BILI_JCT="${{secrets.BILI_JCT}}" DEDEUSERID="${{secrets.DEDEUSERID}}" DEDEUSERID__CKMD5="${{secrets.DEDEUSERID__CKMD5}}" node index.js
+        
