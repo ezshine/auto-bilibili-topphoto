@@ -47,6 +47,11 @@ async function postTopPhoto(base64){
     })
 }
 
+/*
+移动端空间 todo
+https://space.bilibili.com/api/member/uploadTopPhoto?access_key=8a135f48fc67e8216d35e44262295711&actionKey=appkey&appkey=27eb53fc9058f8c3&build=65700100&device=phone&&isNotNeedFileNameKey=1&mobi_app=iphone&platform=ios&sign=cde627802010d90b3476cc8f8db4f36a&ts=1642609465
+*/
+
 //计算两个日期相差的天数
 const diffDays = (date, otherDate) => Math.ceil(Math.abs(date - otherDate) / (1000 * 60 * 60 * 24));
 
@@ -57,7 +62,16 @@ async function getLastPubDistance(){
         url:"https://api.bilibili.com/x/space/arc/search?mid="+DEDEUSERID+"&pn=1&ps=1&order=pubdate&jsonp=jsonp"
     });
 
-    return diffDays(new Date(res.data.data.list.vlist[0].created*1000),new Date())+"";
+    
+    try{
+        return diffDays(new Date(res.data.data.list.vlist[0].created*1000),new Date())+"";
+    }catch(err){
+        console.log("没有发现投稿");
+        console.log(err);
+        return 0;
+    }
+
+    
 }
 
 //执行绘制图片
