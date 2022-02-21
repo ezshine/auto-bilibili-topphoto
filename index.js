@@ -88,7 +88,7 @@ async function painting(){
     ctx.font = '97px hanzi';
 
     //获得鸽的天数
-    let days = "嘿12AB哈";
+    let days = await getLastPubDistance();
 
     //计算文字尺寸
     let size = ctx.measureText(days);
